@@ -50,7 +50,7 @@ namespace mindr.ViewModels
         {
             if (_selected.IsValid && !_reminders.Contains(_selected))
             {
-                _reminders.Add(_selected);
+                _reminders.Add(new Reminder(_selected.Title, _selected.Message, _selected.Due));
             }
         }
     }

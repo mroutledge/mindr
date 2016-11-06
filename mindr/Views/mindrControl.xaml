@@ -14,7 +14,7 @@
         <Label>Next Reminder Due</Label>
         <TextBox Text="{Binding Title, Mode=OneWay}"/>
         <Label>Waiting Reminders</Label>
-        <ListBox MinHeight="2" ItemsSource="{Binding Reminders}" Height="95"/>
+        <ListBox MinHeight="2" ItemsSource="{Binding Reminders}" Height="95" DisplayMemberPath="Title"/>
         <Button Command="{Binding AddReminderCommand, Mode=OneWay}">Add New Reminder</Button>
         <Label>Title</Label>
         <TextBox Name="minderTitle" Text="{Binding Selected.Title}"/>
