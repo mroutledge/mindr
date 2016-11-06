@@ -20,6 +20,7 @@ namespace mindr.Views
         {
             if (e.AddedItems.Count > 0)
             {
+                //display information from selected reminder
                 _viewmodel.ResetSelected((Reminder)e.AddedItems[0]);
             }
         }

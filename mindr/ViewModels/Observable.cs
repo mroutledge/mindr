@@ -7,6 +7,9 @@ using System.ComponentModel;
 
 namespace mindr.ViewModels
 {
+    /// <summary>
+    /// Implementation of INotifyPropertyChanged
+    /// </summary>
     class Observable : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
