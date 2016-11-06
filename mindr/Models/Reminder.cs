@@ -12,5 +12,21 @@ namespace mindr.Models
         public string Message { get; set; }
         public DateTime Created { get; set; }
         public DateTime Due { get; set; }
+
+        public bool IsValid
+        {
+            get
+            {
+                return !string.IsNullOrWhiteSpace(Title) && DateTime.Compare(Due, DateTime.Now) > 0;
+            }
+        }
+
+        public Reminder(string title, string message, DateTime due)
+        {
+            Title = title;
+            Message = message;
+            Created = DateTime.Now;
+            Due = due;
+        }
     }
 }
