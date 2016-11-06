@@ -11,11 +11,10 @@
         <ViewModels:Presenter/>
     </UserControl.DataContext>
     <StackPanel>
-        <Label>Next Reminder Due</Label>
-        <TextBox Text="{Binding Title, Mode=OneWay}"/>
         <Label>Waiting Reminders</Label>
-        <ListBox MinHeight="2" ItemsSource="{Binding Reminders}" Height="95" DisplayMemberPath="Title"/>
+        <ListBox MinHeight="2" ItemsSource="{Binding Reminders}" Height="95" DisplayMemberPath="Title" SelectionChanged="ListBox_SelectionChanged"/>
         <Button Command="{Binding AddReminderCommand, Mode=OneWay}">Add New Reminder</Button>
+        <Button Command="{Binding RemoveReminderCommand, Mode=OneWay}">Delete Selected Reminder</Button>
         <Label>Title</Label>
         <TextBox Name="minderTitle" Text="{Binding Selected.Title}"/>
         <Label>Message</Label>

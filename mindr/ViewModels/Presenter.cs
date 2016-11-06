@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace mindr.ViewModels
 {
-    class Presenter
+    class Presenter : Observable
     {
         private ObservableCollection<Reminder> _reminders = new ObservableCollection<Reminder>();
         public IEnumerable<Reminder> Reminders
@@ -48,10 +48,37 @@ namespace mindr.ViewModels
         /// </summary>
         private void AddReminder()
         {
-            if (_selected.IsValid && !_reminders.Contains(_selected))
+            if (_selected.IsValid)
             {
                 _reminders.Add(new Reminder(_selected.Title, _selected.Message, _selected.Due));
+                ResetSelected();
             }
+        }
+
+        public ICommand RemoveReminderCommand
+        {
+            get { return new DelegateCommand(DeleteReminder); }
+        }
+
+        private void DeleteReminder()
+        {
+            if (_reminders.Contains(Selected))
+            {
+                _reminders.Remove(Selected);
+                ResetSelected();
+            }
+        }
+
+        public void ResetSelected()
+        {
+            Selected = new Reminder("", "", DateTime.Now);
+            RaisePropertyChangedEvent("Selected");
+        }
+
+        public void ResetSelected(Reminder minder)
+        {
+            Selected = minder;
+            RaisePropertyChangedEvent("Selected");
         }
     }
 }
