@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using mindr.DAL;
 
 namespace mindr.ViewModels
 {
@@ -19,6 +20,16 @@ namespace mindr.ViewModels
         public IEnumerable<Reminder> Reminders
         {
             get { return _reminders; }
+            set
+            {
+                foreach (var item in value)
+                {
+                    if (!_reminders.Contains(item))
+                    {
+                        _reminders.Add(item);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -44,6 +55,7 @@ namespace mindr.ViewModels
             if (_selected.IsValid)
             {
                 _reminders.Add(new Reminder(_selected.Title, _selected.Message, _selected.Due));
+                ObjectPersistence.SaveReminders(Reminders);
                 ResetSelected();
             }
         }

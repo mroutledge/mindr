@@ -58,10 +58,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DAL\ObjectPersistence.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
     <Compile Include="ViewModels\Observable.cs" />
     <Compile Include="ViewModels\Presenter.cs" />
-    <Compile Include="ViewModels\ReminderViewModel.cs" />
     <Page Include="Views\mindrControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

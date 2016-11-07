@@ -1,6 +1,7 @@
 ﻿using mindr.Models;
 using mindr.ViewModels;
 using System.Windows.Controls;
+using mindr.DAL;
 
 namespace mindr.Views
 {
@@ -13,7 +14,8 @@ namespace mindr.Views
         public mindrControl()
         {
             InitializeComponent();
-            _viewmodel = (Presenter)base.DataContext;
+            _viewmodel = (Presenter)DataContext;
+            _viewmodel.Reminders = ObjectPersistence.LoadReminders();
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
