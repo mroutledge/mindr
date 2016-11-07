@@ -55,7 +55,6 @@ namespace mindr.ViewModels
             if (_selected.IsValid)
             {
                 _reminders.Add(new Reminder(_selected.Title, _selected.Message, _selected.Due));
-                ObjectPersistence.SaveReminders(Reminders);
                 ResetSelected();
             }
         }
@@ -84,6 +83,7 @@ namespace mindr.ViewModels
         {
             Selected = new Reminder("", "", DateTime.Now);
             RaisePropertyChangedEvent("Selected");
+            ObjectPersistence.SaveReminders(Reminders);
         }
 
         /// <summary>
@@ -94,6 +94,7 @@ namespace mindr.ViewModels
         {
             Selected = minder;
             RaisePropertyChangedEvent("Selected");
+            ObjectPersistence.SaveReminders(Reminders);
         }
     }
 }
