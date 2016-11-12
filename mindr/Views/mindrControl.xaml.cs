@@ -1,7 +1,7 @@
-﻿using mindr.Models;
+﻿using mindr.DAL;
+using mindr.Models;
 using mindr.ViewModels;
 using System.Windows.Controls;
-using mindr.DAL;
 
 namespace mindr.Views
 {
