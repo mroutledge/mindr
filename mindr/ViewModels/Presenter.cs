@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using System.Windows;
+using System.Threading.Tasks;
 
 namespace mindr.ViewModels
 {
@@ -26,6 +28,7 @@ namespace mindr.ViewModels
                     if (!_reminders.Contains(item))
                     {
                         _reminders.Add(item);
+                        SetTimer(item);
                     }
                 }
             }
@@ -53,7 +56,9 @@ namespace mindr.ViewModels
         {
             if (_selected.IsValid)
             {
-                _reminders.Add(new Reminder(_selected.Title, _selected.Message, _selected.Due));
+                Reminder minder = new Reminder(_selected.Title, _selected.Message, _selected.Due);
+                _reminders.Add(minder);
+                SetTimer(minder);
                 ResetSelected();
             }
         }
@@ -81,7 +86,6 @@ namespace mindr.ViewModels
         public void ResetSelected()
         {
             Selected = new Reminder("", "", DateTime.Now);
-            RaisePropertyChangedEvent("Selected");
             ObjectPersistence.SaveReminders(Reminders);
         }
 
@@ -95,5 +99,17 @@ namespace mindr.ViewModels
             RaisePropertyChangedEvent("Selected");
             ObjectPersistence.SaveReminders(Reminders);
         }
+
+        private void SetTimer(Reminder minder)
+        {
+            TimeSpan ts = minder.Due - DateTime.Now;
+            Task.Delay(ts).ContinueWith(x => DisplayReminder(minder));
+        }
+
+        private void DisplayReminder(Reminder minder)
+        {
+            MessageBoxResult result = MessageBox.Show(minder.Message, "REMINDER -" + minder.Title);
+        }
+
     }
 }
