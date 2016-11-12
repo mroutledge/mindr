@@ -6,7 +6,7 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:local="clr-namespace:mindr.Views"
              xmlns:ViewModels="clr-namespace:mindr.ViewModels" x:Class="mindr.Views.mindrControl"
-             mc:Ignorable="d" d:DesignWidth="300" Height="298.143">
+             mc:Ignorable="d" d:DesignWidth="300" Height="330">
     <UserControl.DataContext>
         <ViewModels:Presenter/>
     </UserControl.DataContext>
@@ -18,7 +18,7 @@
         <Label Foreground="Blue">Title</Label>
         <TextBox Name="minderTitle" Text="{Binding Selected.Title}"/>
         <Label Foreground="Blue">Message</Label>
-        <TextBox Name="minderMessage" Text="{Binding Selected.Message}"/>
+        <TextBox Name="minderMessage" Text="{Binding Selected.Message}" Height="50" TextWrapping="Wrap"/>
         <xctk:DateTimePicker Value="{Binding Selected.Due}"/>
     </StackPanel>
 </UserControl>

@@ -1,10 +1,9 @@
-﻿using mindr.Models;
+﻿using mindr.DAL;
+using mindr.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Input;
 using System.Collections.ObjectModel;
-using mindr.DAL;
+using System.Windows.Input;
 
 namespace mindr.ViewModels
 {
