@@ -9,6 +9,15 @@ namespace mindr.Models
     {
         //Title that discribes the reminder
         public string Title { get; set; }
+
+        //The information about the reminder displayed in the list
+        public string DisplayName
+        {
+            get
+            {
+                return string.Format("{0} {1} {2}", Title, Due.ToShortDateString(), Due.ToShortTimeString());
+            }
+        }
         //Discription of the reminder
         public string Message { get; set; }
         //When the reminder was created
