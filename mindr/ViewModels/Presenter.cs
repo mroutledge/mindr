@@ -80,12 +80,18 @@ namespace mindr.ViewModels
             }
         }
 
+        public ICommand ClearSelecetedCommand
+        {
+            get { return new DelegateCommand(ResetSelected); }
+        }
+
         /// <summary>
         /// Resets Select to default values
         /// </summary>
         public void ResetSelected()
         {
             Selected = new Reminder("", "", DateTime.Now);
+            RaisePropertyChangedEvent("Selected");
             ObjectPersistence.SaveReminders(Reminders);
         }
 
@@ -105,7 +111,7 @@ namespace mindr.ViewModels
             TimeSpan ts = minder.Due - DateTime.Now;
             if (ts.TotalSeconds > 0)
             {
-                Task.Delay(ts).ContinueWith( x => DisplayReminder(minder)); 
+                Task.Delay(ts).ContinueWith(x => DisplayReminder(minder));
             }
         }
 
