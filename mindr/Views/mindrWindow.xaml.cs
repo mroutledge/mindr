@@ -11,10 +11,5 @@ namespace mindr.Views
         {
             InitializeComponent();
         }
-
-        private void mindrControl_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

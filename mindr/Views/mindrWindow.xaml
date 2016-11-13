@@ -8,10 +8,10 @@
         xmlns:Views="clr-namespace:mindr.Views"
         x:Class="mindr.Views.MainWindow"
         mc:Ignorable="d"
-        Title="mindr" Height="350" Width="350" BindingGroup="{Binding Mode=OneWay}" Background="LightGray">
+        Title="mindr" Height="350" Width="350" Background="LightGray">
     <Window.DataContext>
         <ViewModels:Presenter/>
     </Window.DataContext>
 
-    <Views:mindrControl Loaded="mindrControl_Loaded" Margin="0,0,0,-59" VerticalAlignment="Top" Height="343"/>
+    <Views:mindrControl Margin="0,0,0,-59" VerticalAlignment="Top" Height="343"/>
 </Window>
