@@ -103,12 +103,20 @@ namespace mindr.ViewModels
         private void SetTimer(Reminder minder)
         {
             TimeSpan ts = minder.Due - DateTime.Now;
-            Task.Delay(ts).ContinueWith(x => DisplayReminder(minder));
+            if (ts.TotalSeconds > 0)
+            {
+                Task.Delay(ts).ContinueWith( x => DisplayReminder(minder)); 
+            }
         }
 
         private void DisplayReminder(Reminder minder)
         {
-            MessageBoxResult result = MessageBox.Show(minder.Message, "REMINDER -" + minder.Title);
+            MessageBoxResult result = MessageBox.Show(minder.Message + "\nSNOOZE?", "REMINDER -" + minder.Title, MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                minder.Due = new DateTime(minder.Due.Year, minder.Due.Month, minder.Due.Day, minder.Due.Hour, minder.Due.Minute + 9, minder.Due.Second);
+                SetTimer(minder);
+            }
         }
 
     }
