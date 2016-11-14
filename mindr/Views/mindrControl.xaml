@@ -12,14 +12,13 @@
     </UserControl.DataContext>
     <StackPanel Margin="0,0,0,-12">
         <Label Foreground="Blue">Waiting Reminders</Label>
-        <ListBox MinHeight="2" ItemsSource="{Binding Reminders}" Height="104" DisplayMemberPath="DisplayName" SelectionChanged="ListBox_SelectionChanged" ToolTip="List of created reminders"/>
-        <Button Command="{Binding AddReminderCommand, Mode=OneWay}">Add New Reminder</Button>
-        <Button Command="{Binding RemoveReminderCommand, Mode=OneWay}">Delete Selected Reminder</Button>
-        <Button Command="{Binding ClearSelecetedCommand}">Clear Selected</Button>
+        <ListBox MinHeight="2" ItemsSource="{Binding Reminders}" MouseUp="ListBox_MouseUp" Height="104" DisplayMemberPath="DisplayName" SelectionChanged="ListBox_SelectionChanged" ToolTip="List of created reminders" Name="ReminderListBox"/>
+        <Button Command="{Binding AddReminderCommand, Mode=OneWay}" ToolTip="Add a reminder" AutomationProperties.Name="AddButton" Click="AddButton_Click">Add New Reminder</Button>
+        <Button Command="{Binding RemoveReminderCommand, Mode=OneWay}" AutomationProperties.Name="DeleteButton">Delete Selected Reminder</Button>
         <Label Foreground="Blue">Title</Label>
         <TextBox Name="minderTitle" Text="{Binding Selected.Title}"/>
         <Label Foreground="Blue">Message</Label>
-        <TextBox x:Name="minderMessage" Text="{Binding Selected.Message}" Height="65" TextWrapping="Wrap"/>
+        <TextBox x:Name="minderMessage" Text="{Binding Selected.Message}" Height="79" TextWrapping="Wrap"/>
         <xctk:DateTimePicker Value="{Binding Selected.Due}"/>
     </StackPanel>
 </UserControl>

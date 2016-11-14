@@ -3,9 +3,10 @@ using mindr.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
-using System.Windows;
 using System.Threading.Tasks;
+using System.Threading;
+using System.Windows;
+using System.Windows.Input;
 
 namespace mindr.ViewModels
 {
@@ -28,7 +29,6 @@ namespace mindr.ViewModels
                     if (!_reminders.Contains(item))
                     {
                         _reminders.Add(item);
-                        SetTimer(item);
                     }
                 }
             }
@@ -58,7 +58,6 @@ namespace mindr.ViewModels
             {
                 Reminder minder = new Reminder(_selected.Title, _selected.Message, _selected.Due);
                 _reminders.Add(minder);
-                SetTimer(minder);
                 ResetSelected();
             }
         }
@@ -71,18 +70,13 @@ namespace mindr.ViewModels
         /// <summary>
         /// Removes the selected Reminder from the list of reminders
         /// </summary>
-        private void DeleteReminder()
+        public void DeleteReminder()
         {
             if (_reminders.Contains(Selected))
             {
                 _reminders.Remove(Selected);
                 ResetSelected();
             }
-        }
-
-        public ICommand ClearSelecetedCommand
-        {
-            get { return new DelegateCommand(ResetSelected); }
         }
 
         /// <summary>
@@ -105,25 +99,5 @@ namespace mindr.ViewModels
             RaisePropertyChangedEvent("Selected");
             ObjectPersistence.SaveReminders(Reminders);
         }
-
-        private void SetTimer(Reminder minder)
-        {
-            TimeSpan ts = minder.Due - DateTime.Now;
-            if (ts.TotalSeconds > 0)
-            {
-                Task.Delay(ts).ContinueWith(x => DisplayReminder(minder));
-            }
-        }
-
-        private void DisplayReminder(Reminder minder)
-        {
-            MessageBoxResult result = MessageBox.Show(minder.Message + "\nSNOOZE?", "REMINDER -" + minder.Title, MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
-            {
-                minder.Due = new DateTime(minder.Due.Year, minder.Due.Month, minder.Due.Day, minder.Due.Hour, minder.Due.Minute + 9, minder.Due.Second);
-                SetTimer(minder);
-            }
-        }
-
     }
 }
